@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Quiz!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <section class="content">
+            <div id="loveQuiz">
+                <h2>Love Quiz!</h2>
+                <p>Are you ready?</p>
+                <button id="proceedButton" onclick="nextStep(1)">Proceed</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function nextStep(step) {
+            var contentSection = document.querySelector('.content');
+            if (step === 1) {
+                contentSection.innerHTML = '<div id="step1"><h2>Who are you?</h2><label for="firstName">First Name:</label><input type="text" id="firstName" name="firstName" required><br><br><label for="lastName">Last Name:</label><input type="text" id="lastName" name="lastName" required><br><br><button id="nextButton" onclick="nextStep(2)">Next</button></div>';
+            } else if (step === 2) {
+                var firstName = document.getElementById("firstName").value.trim();
+                var lastName = document.getElementById("lastName").value.trim();
+                if (firstName === "" || lastName === "") {
+                    alert("Please provide your first and last name.");
+                    return;
+                }
+                contentSection.innerHTML = '<div id="step2"><h2>Age</h2><label for="age">Age:</label><input type="text" id="age" name="age" required><br><br><button id="nextButton" onclick="nextStep(3)">Next</button></div>';
+            } else if (step === 3) {
+                var age = document.getElementById("age").value.trim();
+                if (age === "") {
+                    alert("Please provide your age.");
+                    return;
+                }
+                contentSection.innerHTML = '<div id="step3"><h2>Address</h2><label for="address">Address:</label><input type="text" id="address" name="address" required><br><br><button id="nextButton" onclick="nextStep(4)">Next</button></div>';
+            } else if (step === 4) {
+                var address = document.getElementById("address").value.trim();
+                if (address === "") {
+                    alert("Please provide your address.");
+                    return;
+                }
+                contentSection.innerHTML = '<div id="step4"><h2>Do you love your boyfriend?</h2><label for="love">Yes</label><input type="radio" id="love" name="love" value="Yes"><label for="love">No</label><input type="radio" id="love" name="love" value="No"><br><br><button id="nextButton" onclick="nextStep(5)">Next</button></div>';
+            } else if (step === 5) {
+                var love = document.querySelector('input[name="love"]:checked');
+                if (!love) {
+                    alert("Please select if you love your boyfriend or not.");
+                    return;
+                }
+                contentSection.innerHTML = '<div id="step5"><h2>You\'re nearly there!</h2><button id="nextButton" onclick="nextStep(6)">Next</button></div>';
+            } else if (step === 6) {
+                contentSection.innerHTML = '<div id="step6"><h2>Are you ready??</h2><button id="nextButton" onclick="nextStep(7)">Next</button></div>';
+            } else if (step === 7) {
+                contentSection.innerHTML = '<div id="step7"><h2>Are you sure?</h2><button id="nextButton" onclick="nextStep(8)">Next</button></div>';
+            } else if (step === 8) {
+                contentSection.innerHTML = '<div id="step8"><h2>Are you really sure?</h2><button id="nextButton" onclick="nextStep(9)">Next</button></div>';
+            } else if (step === 9) {
+                contentSection.innerHTML = '<div id="step9"><h2>Fine, here it goes.</h2><button id="nextButton" onclick="nextStep(10)">Next</button></div>';
+            } else if (step === 10) {
+                contentSection.innerHTML = '<div id="step10"><h2>Lance just wants to ask you a question.</h2><button id="nextButton" onclick="nextStep(11)">Next</button></div>';
+            } else if (step === 11) {
+                contentSection.innerHTML = '<div id="step11"><h2>Will you be my valentine?</h2><button id="yesButton" onclick="respondToValentine(true)">Yes</button><button id="noButton" onclick="respondToValentine(false)">No</button></div>';
+            }
+        }
+
+        function respondToValentine(response) {
+            var contentSection = document.querySelector('.content');
+            if (response) {
+                contentSection.innerHTML = '<h2>See you on Feb. 14 :))</h2>';
+            } else {
+                alert("Lance doesn't take no for an answer.");
+            }
+        }
+    </script>
+</body>
+</html>
